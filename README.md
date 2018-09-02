@@ -69,3 +69,9 @@ To compile clojurescript to javascript:
 lein clean
 lein cljsbuild once min
 ```
+
+## Lint
+```
+brew install boot-clj
+boot check
+````
