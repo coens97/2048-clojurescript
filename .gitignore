@@ -12,3 +12,14 @@ pom.xml.asc
 .lein-failures
 .nrepl-port
 .cpcache/
+
+/*.log
+/target
+/*-init.clj
+/resources/public/js
+/resources/public/test
+.nrepl-port
+.lein-failures
+out
+.DS_Store
+node_modules
