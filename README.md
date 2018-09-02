@@ -74,4 +74,10 @@ lein cljsbuild once min
 ```
 brew install boot-clj
 boot check
-````
+```
+
+## Style check and fix
+```
+lein cljfmt check
+lein cljfmt fix
+```

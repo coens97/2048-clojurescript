@@ -5,9 +5,7 @@
    [re-pressed.core :as rp]
    [game-2048.events :as events]
    [game-2048.views :as views]
-   [game-2048.config :as config]
-   ))
-
+   [game-2048.config :as config]))
 
 (defn dev-setup []
   (when config/debug?
