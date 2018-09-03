@@ -1,5 +1,6 @@
 # game-2048
-
+[![Build Status](https://travis-ci.org/coens97/2048-clojurescript.svg?branch=master)](https://travis-ci.org/coens97/2048-clojurescript)
+[Checkout the demo](https://coens97.github.io/2048-clojurescript/)
 A [re-frame](https://github.com/Day8/re-frame) application designed to ... well, that part is up to you.
 
 ## Development Mode
