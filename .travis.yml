@@ -8,6 +8,6 @@ deploy:
   provider: pages
   skip_cleanup: true
   github_token: $GITHUB_TOKEN
-  local_dir: rescources/public
+  local_dir: resources/public
   on:
     branch: master
