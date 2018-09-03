@@ -26,5 +26,5 @@
     [:div#mainContainer
      [:h1#header "2048"
       [:a {:href "https://github.com/coens97/2048-clojurescript" :target "_blank"}
-       "See code on GitHub"]]
+       "GitHub"]]
      (game/game-panel)]))
