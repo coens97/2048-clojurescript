@@ -3,7 +3,8 @@
    [re-frame.core :as re-frame]
    [re-pressed.core :as rp]
    [game-2048.events :as events]
-   [game-2048.subs :as subs]))
+   [game-2048.subs :as subs]
+   [game-2048.game :as game]))
 
 (defn dispatch-keydown-rules []
   (re-frame/dispatch
@@ -25,5 +26,5 @@
     [:div#mainContainer
      [:h1#header "2048"
       [:a {:href "https://github.com/coens97/2048-clojurescript" :target "_blank"}
-
-       "See code on GitHub"]]]))
+       "See code on GitHub"]]
+     (game/game-panel)]))
