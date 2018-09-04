@@ -11,8 +11,3 @@
  ::board
  (fn [db]
    (:board db)))
-
-(re-frame/reg-sub
- ::re-pressed-example
- (fn [db _]
-   (:re-pressed-example db)))

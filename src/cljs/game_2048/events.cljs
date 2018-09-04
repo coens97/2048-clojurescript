@@ -9,10 +9,11 @@
  (fn-traced [_ _]
             db/default-db))
 
-(re-frame/reg-event-db
- ::set-re-pressed-example
- (fn [db [_ value]]
-   (assoc db :re-pressed-example value)))
+(defn randomcell
+  [board]
+  (let [randvalue (rand-int 4)]
+    (assoc board randvalue
+           (assoc (nth board randvalue) (rand-int 4) 2))))
 
 (re-frame/reg-event-db
  ::start-game
@@ -23,4 +24,5 @@
                                                           (fn [x] 0)
                                                           (range 0 4))))
                                         (range 0 4)))
-                              (assoc (rand-int 4) [0 2 2 0])))))
+                              (randomcell)
+                              (randomcell)))))
