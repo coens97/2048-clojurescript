@@ -71,8 +71,7 @@
                              (drop-block x (inc y)))
         (= item-below item) (-> board ;; Merge
                                 (set-board x y 0)
-                                (set-board x (inc y) (* 2 item))
-                                (drop-block x (inc y)))
+                                (set-board x (inc y) (* 2 item)))
         :else board))
     board))
 
