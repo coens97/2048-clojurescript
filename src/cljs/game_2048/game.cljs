@@ -10,8 +10,27 @@
    [:p value]])
 
 ;; Displaying the game cell
+(defn cellcolors [cellvalue]
+  (case cellvalue
+    0 "#BBBBBB"
+    2 "#7fbfc7"
+    4 "#82b4c2"
+    8 "#86aabc"
+    16 "#899fb7"
+    32 "#8c95b1"
+    64 "#908aac"
+    128 "#937fa7"
+    256 "#9675a1"
+    512 "#996a9c"
+    1024 "#9d5f97"
+    2048 "#a05591"
+    4096 "#a34a8c"
+    8192 "#a74086"
+    "default" "#aa3581"))
+
 (defn cell-panel [x]
   [:div.board-cell
+   {:style {:background-color (cellcolors x)}}
    (if (= x 0) "" x)])
 
 ;; Displaying the game board with the cells in it
