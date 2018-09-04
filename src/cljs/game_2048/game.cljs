@@ -11,7 +11,8 @@
 
 ;; Displaying the game cell
 (defn cell-panel [x]
-  [:div.board-cell x])
+  [:div.board-cell
+   (if (= x 0) "" x)])
 
 ;; Displaying the game board with the cells in it
 (defn board-panel []

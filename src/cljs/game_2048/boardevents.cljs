@@ -99,19 +99,54 @@
             (let [{board :board} db]
               (assoc db :board (board-move-down board)))))
 
+(defn rotate-right [coll]
+  (apply mapv #(into [] %&)
+         (vec (reverse coll))))
+
+(defn rotate-left [coll]
+  (->
+   coll
+   reverse
+   rotate-right
+   reverse
+   vec))
+
 ;; Event when user wants to move left
+(defn board-move-left [board]
+  (->
+   board
+   rotate-left
+   board-move-down
+   rotate-right))
+
 (re-frame/reg-event-db
  ::moveleft
  (fn-traced [db [_ _]]
-            db))
+            (let [{board :board} db]
+              (assoc db :board (board-move-left board)))))
 
 ;; Event when user wants to move right
+(defn board-move-right [board]
+  (->
+   board
+   rotate-right
+   board-move-down
+   rotate-left))
+
 (re-frame/reg-event-db
  ::moveright
  (fn-traced [db [_ _]]
-            db))
+            (let [{board :board} db]
+              (assoc db :board (board-move-right board)))))
 
 ;; Event when user wants to move up
+(defn board-move-up [board]
+  (->
+   board
+   rotate-right
+   board-move-down
+   rotate-left))
+
 (re-frame/reg-event-db
  ::moveup
  (fn-traced [db [_ _]]
