@@ -143,10 +143,13 @@
   (->
    board
    rotate-right
+   rotate-right
    board-move-down
-   rotate-left))
+   rotate-right
+   rotate-right))
 
 (re-frame/reg-event-db
  ::moveup
  (fn-traced [db [_ _]]
-            db))
+            (let [{board :board} db]
+              (assoc db :board (board-move-up board)))))
