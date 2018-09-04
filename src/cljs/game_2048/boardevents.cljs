@@ -4,12 +4,14 @@
    [game-2048.db :as db]
    [day8.re-frame.tracing :refer-macros [fn-traced defn-traced]]))
 
+;; Add cell 2 to random position of the board
 (defn randomcell
   [board]
   (let [randvalue (rand-int 4)]
     (assoc board randvalue
            (assoc (nth board randvalue) (rand-int 4) 2))))
 
+;; Generate empty board used at the start of the game
 (defn empty-board []
   (->
    (into [] (map
@@ -20,6 +22,7 @@
    (randomcell)
    (randomcell)))
 
+;; Event when user wants to move down
 (re-frame/reg-event-db
  ::movedown
  (fn-traced [db [_ _]]
