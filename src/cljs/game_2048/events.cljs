@@ -16,8 +16,18 @@
 (defn setkeyboardrules []
   (re-frame/dispatch
    [::rp/set-keydown-rules
-    {:event-keys [[[::boardevents/movedown] ;; Map key to event
-                   [{:which 83}]]] ;; s
+    {:event-keys [[[::boardevents/moveleft]
+                   [{:which 65}] ;; a
+                   [{:which 37}]] ;; arrow
+                  [[::boardevents/moveright]
+                   [{:which 68}] ;; d
+                   [{:which 39}]] ;; arrow
+                  [[::boardevents/moveup]
+                   [{:which 87}] ;; w
+                   [{:which 38}]] ;; arrow
+                  [[::boardevents/movedown]
+                   [{:which 83}] ;; s
+                   [{:which 40}]]] ;; arrow
      :clear-keys
      [[{:which 27}]]}]) ;; escape
 )

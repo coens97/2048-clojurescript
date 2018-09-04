@@ -50,9 +50,7 @@
         board)
       (let [[x y] (nth empty-cells (rand-int empty-count))] ;; randomly pick cell
         (set-board
-         board
-         x
-         y
+         board x y
          (if (= (rand-int 4) 0) 4 2)))))) ;; 75% change on 2
 
 (re-frame/reg-event-db
@@ -100,3 +98,21 @@
  (fn-traced [db [_ _]]
             (let [{board :board} db]
               (assoc db :board (board-move-down board)))))
+
+;; Event when user wants to move left
+(re-frame/reg-event-db
+ ::moveleft
+ (fn-traced [db [_ _]]
+            db))
+
+;; Event when user wants to move right
+(re-frame/reg-event-db
+ ::moveright
+ (fn-traced [db [_ _]]
+            db))
+
+;; Event when user wants to move up
+(re-frame/reg-event-db
+ ::moveup
+ (fn-traced [db [_ _]]
+            db))
