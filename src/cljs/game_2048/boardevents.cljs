@@ -2,7 +2,6 @@
   (:require
    [re-frame.core :as re-frame]
    [game-2048.db :as db]
-   [game-2048.events :as events]
    [day8.re-frame.tracing :refer-macros [fn-traced defn-traced]]))
 
 ;; Get board value
@@ -46,7 +45,7 @@
         empty-count (count empty-cells)];; count empty cells
     (if (= empty-count 0)
       (do ; game-over if no cells left
-        (re-frame/dispatch [::events/gameover])
+        ;(re-frame/dispatch [::events/gameover])
         board)
       (let [[x y] (nth empty-cells (rand-int empty-count))] ;; randomly pick cell
         (set-board
