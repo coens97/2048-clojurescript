@@ -12,7 +12,7 @@
   (at-media {:max-width "360px"}
             [:html {:font-size "0.6em"}])
 
-  [:body :html {:position fixed}]
+  [:body :html {:position "fixed"}]
 
   [:body {:background-color "#ABA8AA"
           :font-family "\"Lucida Console\", Monaco, monospace"
