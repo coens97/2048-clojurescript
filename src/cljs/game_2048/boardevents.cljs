@@ -34,16 +34,38 @@
    (randomcell)
    (randomcell)))
 
-(defn board-move-down
-  [board]
-  (for [y (range 2 -1 -1)] ;; (2 1 0)
-    (for [x (range 0 4)] ;; (2 1 0)
-      (let [item (->
-                  board
-                  (nth y)
-                  (nth x))]
-        (cljs.pprint/pprint item))))
-  board)
+;; Drop block recursively, move or merge if possible
+(defn drop-block [board x y]
+  (if (< y 3) ;; Stop condition for recursion
+    (let [item (get-board board x y)
+          item-below (get-board board x (inc y))]
+      (cond
+        (= item-below 0) (-> board ;; Move
+                             (set-board x y 0)
+                             (set-board x (inc y) item)
+                             (drop-block x (inc y)))
+        (= item-below item) (-> board ;; Merge
+                                (set-board x y 0)
+                                (set-board x (inc y) (* 2 item))
+                                (drop-block x (inc y)))
+        :else board))
+    board))
+
+;; Go through cells
+(defn board-move-down [board-in]
+  (reduce
+   (fn [board [y x]]
+     (let [item (->
+                 board
+                 (nth y)
+                 (nth x))]
+       (if (= item 0)
+         board
+         (drop-block board x y))))
+   board-in
+   (for [e1 (range 2 -1 -1)
+         e2 (range 0 4)]
+     (list e1 e2))))
 
 (board-move-down [[0 2 2 0] [0 0 0 0] [0 0 2 0] [0 0 0 0]])
 ;; Event when user wants to move down
