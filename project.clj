@@ -35,12 +35,12 @@
                    [day8.re-frame/re-frame-10x "0.3.3"]
                    [day8.re-frame/tracing "0.5.1"]
                    [figwheel-sidecar "0.5.16"]
+                   [cljsjs/hammer "2.0.8-0"]
                    [cider/piggieback "0.3.5"]]
 
     :plugins      [[lein-figwheel "0.5.16"]
                    [lein-doo "0.1.8"]]}
-   :prod { :dependencies [[day8.re-frame/tracing-stubs "0.5.1"]]}
-   }
+   :prod {:dependencies [[day8.re-frame/tracing-stubs "0.5.1"]]}}
 
   :cljsbuild
   {:builds
@@ -56,8 +56,7 @@
                                            day8.re-frame-10x.preload]
                     :closure-defines      {"re_frame.trace.trace_enabled_QMARK_" true
                                            "day8.re_frame.tracing.trace_enabled_QMARK_" true}
-                    :external-config      {:devtools/config {:features-to-install :all}}
-                    }}
+                    :external-config      {:devtools/config {:features-to-install :all}}}}
 
     {:id           "min"
      :source-paths ["src/cljs"]
@@ -72,6 +71,4 @@
      :compiler     {:main          game-2048.runner
                     :output-to     "resources/public/js/compiled/test.js"
                     :output-dir    "resources/public/js/compiled/test/out"
-                    :optimizations :none}}
-    ]}
-  )
+                    :optimizations :none}}]})

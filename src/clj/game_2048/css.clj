@@ -4,10 +4,13 @@
 
 (defstyles screen
   (at-media {:max-width "768px"}
-            [:html {:font-size "0.75em"}]) ; REM is based on the font-size, scaling down the game on a small screen
+            [:html {:font-size "0.85em"}]) ; REM is based on the font-size, scaling down the game on a small screen
 
   (at-media {:max-width "540px"}
-            [:html {:font-size "0.5em"}])
+            [:html {:font-size "0.75em"}])
+
+  (at-media {:max-width "360px"}
+            [:html {:font-size "0.6em"}])
 
   [:body {:background-color "#ABA8AA"
           :font-family "\"Lucida Console\", Monaco, monospace"
