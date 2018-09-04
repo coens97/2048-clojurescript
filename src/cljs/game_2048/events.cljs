@@ -13,3 +13,14 @@
  ::set-re-pressed-example
  (fn [db [_ value]]
    (assoc db :re-pressed-example value)))
+
+(re-frame/reg-event-db
+ ::start-game
+ (fn-traced [db [_ _]]
+            (assoc db :board (->
+                              (into [] (map
+                                        (fn [x] (into [] (map
+                                                          (fn [x] 0)
+                                                          (range 0 4))))
+                                        (range 0 4)))
+                              (assoc (rand-int 4) [0 2 2 0])))))
