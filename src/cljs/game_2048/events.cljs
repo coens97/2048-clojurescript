@@ -28,3 +28,9 @@
  (fn-traced [db [_ _]]
             (setkeyboardrules)
             (assoc db :board (boardevents/empty-board))))
+
+;; Game over
+(re-frame/reg-event-db
+ ::gameover
+ (fn-traced [db [_ _]]
+            db));; TODO!

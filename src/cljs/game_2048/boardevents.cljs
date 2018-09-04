@@ -2,6 +2,7 @@
   (:require
    [re-frame.core :as re-frame]
    [game-2048.db :as db]
+   [game-2048.events :as events]
    [day8.re-frame.tracing :refer-macros [fn-traced defn-traced]]))
 
 ;; Get board value
@@ -34,12 +35,39 @@
    (randomcell)
    (randomcell)))
 
+;; Event after move when new block is created
+(defn new-block [board]
+  (let [empty-cells
+        (filter ;; get all empty cells
+         (fn [[x y]] (= (get-board board x y) 0))
+         (for [e1 (range 0 4)
+               e2 (range 0 4)]
+           (list e1 e2)))
+        empty-count (count empty-cells)];; count empty cells
+    (if (= empty-count 0)
+      (do ; game-over if no cells left
+        (re-frame/dispatch [::events/gameover])
+        board)
+      (let [[x y] (nth empty-cells (rand-int empty-count))] ;; randomly pick cell
+        (set-board
+         board
+         x
+         y
+         (if (= (rand-int 4) 0) 4 2)))))) ;; 75% change on 2
+
+(re-frame/reg-event-db
+ ::newblock
+ (fn-traced [db [_ _]]
+            (let [{board :board} db]
+              (assoc db :board (new-block board)))))
+
 ;; Drop block recursively, move or merge if possible
 (defn drop-block [board x y]
   (if (< y 3) ;; Stop condition for recursion
     (let [item (get-board board x y)
           item-below (get-board board x (inc y))]
       (cond
+        (= item 0) board ;; Skip
         (= item-below 0) (-> board ;; Move
                              (set-board x y 0)
                              (set-board x (inc y) item)
@@ -53,21 +81,19 @@
 
 ;; Go through cells
 (defn board-move-down [board-in]
-  (reduce
-   (fn [board [y x]]
-     (let [item (->
-                 board
-                 (nth y)
-                 (nth x))]
-       (if (= item 0)
-         board
-         (drop-block board x y))))
-   board-in
-   (for [e1 (range 2 -1 -1)
-         e2 (range 0 4)]
-     (list e1 e2))))
+  (let [board-result
+        (reduce
+         (fn [board [y x]]
+           (drop-block board x y))
+         board-in
+         (for [e1 (range 2 -1 -1)
+               e2 (range 0 4)]
+           (list e1 e2)))]
 
-(board-move-down [[0 2 2 0] [0 0 0 0] [0 0 2 0] [0 0 0 0]])
+    (if (not= board-in board-result) ;; If blocks have moved
+      (re-frame/dispatch [:game-2048.boardevents/newblock]))
+    board-result))
+
 ;; Event when user wants to move down
 (re-frame/reg-event-db
  ::movedown
