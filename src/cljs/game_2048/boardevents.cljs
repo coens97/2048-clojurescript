@@ -2,6 +2,7 @@
   (:require
    [re-frame.core :as re-frame]
    [game-2048.db :as db]
+   [game-2048.gameevents :as gameevents]
    [day8.re-frame.tracing :refer-macros [fn-traced defn-traced]]))
 
 ;; Get board value
@@ -69,9 +70,11 @@
                              (set-board x y 0)
                              (set-board x (inc y) item)
                              (drop-block x (inc y)))
-        (= item-below item) (-> board ;; Merge
-                                (set-board x y 0)
-                                (set-board x (inc y) (* 2 item)))
+        (= item-below item) (do
+                              (re-frame/dispatch [::gameevents/increase-score (* 2 item)])
+                              (-> board ;; Merge
+                                  (set-board x y 0)
+                                  (set-board x (inc y) (* 2 item))))
         :else board))
     board))
 

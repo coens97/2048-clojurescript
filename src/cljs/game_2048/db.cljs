@@ -6,4 +6,6 @@
            (fn [x] (map
                     (fn [x] 0)
                     (range 0 4)))
-           (range 0 4))})
+           (range 0 4))
+   :score 0
+   :highscore 0})

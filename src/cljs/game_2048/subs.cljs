@@ -6,3 +6,13 @@
  ::board
  (fn [db]
    (:board db)))
+
+(re-frame/reg-sub
+ ::score
+ (fn [db]
+   (:score db)))
+
+(re-frame/reg-sub
+ ::highscore
+ (fn [db]
+   (:highscore db)))

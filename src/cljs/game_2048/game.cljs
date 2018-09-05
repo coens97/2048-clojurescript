@@ -48,8 +48,10 @@
 
 ;; Main game panel
 (defn game-panel []
-  [:div#game-panel
-   (score-panel "Score" 0)
-   (score-panel "Best score" 0)
-   [:br.clear]
-   (board-panel)])
+  (let [score (re-frame/subscribe [::subs/score])
+        highscore (re-frame/subscribe [::subs/highscore])] ;; Get the current state of the score
+    [:div#game-panel
+     (score-panel "Score" @score)
+     (score-panel "Best score" @highscore)
+     [:br.clear]
+     (board-panel)]))
