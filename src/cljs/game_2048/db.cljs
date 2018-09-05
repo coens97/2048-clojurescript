@@ -9,4 +9,4 @@
            (range 0 4))
    :gameover false
    :score 0
-   :highscore (.getItem (.-localStorage js/window) "highscore")})
+   :highscore (or (.getItem (.-localStorage js/window) "highscore") 0)})
