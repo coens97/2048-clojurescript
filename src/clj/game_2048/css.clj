@@ -16,7 +16,8 @@
 
   [:body {:background-color "#ABA8AA"
           :font-family "\"Lucida Console\", Monaco, monospace"
-          :color "#3A3A47"}]
+          :color "#3A3A47"
+          :width "100%"}]
 
   [:#mainContainer {:background-color "#EDEFE5"
                     :width "26.5rem"

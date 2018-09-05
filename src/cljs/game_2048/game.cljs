@@ -28,7 +28,8 @@
     8192 "#a74086"
     "default" "#aa3581"))
 
-(defn cell-panel [x]
+(defn cell-panel [index x]
+  ^{:key index}
   [:div.board-cell
    {:style {:background-color (cellcolors x)}}
    (if (= x 0) "" x)])
@@ -38,11 +39,13 @@
   (let [board (re-frame/subscribe [::subs/board])] ;; Get the current state of the board
     [:div.board
      ;(cljs.pprint/pprint board) ; debugging to console.log the board data
-     (map ;; Each row of the board
-      (fn [x]
-        [:div.board-row (map ;; Each cell of the row
-                         cell-panel
-                         x)])
+     (map-indexed ;; Each row of the board
+      (fn [index x]
+        ^{:key index}
+        [:div.board-row
+         (map-indexed ;; Each cell of the row
+          cell-panel
+          x)])
       @board)
      [:br.clear]]))
 
