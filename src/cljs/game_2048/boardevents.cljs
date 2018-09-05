@@ -35,6 +35,20 @@
    (randomcell)
    (randomcell)))
 
+;; Check game over
+(defn check-gameover [board empty-cells]
+  (if (= empty-cells 0) ;; if board is full
+    (if (not ;; if no cells can merge
+         (or
+          (some ;; if 2 vertical cells can merge on a full board
+           (fn [[x y]] (= (get-board board x y) (get-board board x (inc y))))
+           (for [e1 (range 0 4) e2 (range 0 3)] (list e1 e2)))
+          (some ;; if 2 horizontal cells can merge on a full board
+           (fn [[x y]] (= (get-board board x y) (get-board board (inc x) y)))
+           (for [e1 (range 0 3) e2 (range 0 4)] (list e1 e2)))))
+      (re-frame/dispatch [::gameevents/gameover])))
+  board)
+
 ;; Event after move when new block is created
 (defn new-block [board]
   (let [empty-cells
@@ -44,14 +58,12 @@
                e2 (range 0 4)]
            (list e1 e2)))
         empty-count (count empty-cells)];; count empty cells
-    (if (= empty-count 0)
-      (do ; game-over if no cells left
-        ;(re-frame/dispatch [::events/gameover])
-        board)
-      (let [[x y] (nth empty-cells (rand-int empty-count))] ;; randomly pick cell
-        (set-board
-         board x y
-         (if (= (rand-int 4) 0) 4 2)))))) ;; 75% change on 2
+    (let [[x y] (nth empty-cells (rand-int empty-count))] ;; randomly pick cell
+      (-> board
+          (set-board
+           x y
+           (if (= (rand-int 4) 0) 4 2));; 75% change on 2
+          (check-gameover (dec empty-count))))))
 
 (re-frame/reg-event-db
  ::newblock

@@ -16,3 +16,8 @@
  ::highscore
  (fn [db]
    (:highscore db)))
+
+(re-frame/reg-sub
+ ::gameover
+ (fn [db]
+   (:gameover db)))

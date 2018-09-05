@@ -7,5 +7,6 @@
                     (fn [x] 0)
                     (range 0 4)))
            (range 0 4))
+   :gameover false
    :score 0
    :highscore (.getItem (.-localStorage js/window) "highscore")})

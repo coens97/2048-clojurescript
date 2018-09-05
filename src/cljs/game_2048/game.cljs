@@ -1,6 +1,7 @@
 (ns game-2048.game
   (:require
    [re-frame.core :as re-frame]
+   [game-2048.events :as events]
    [game-2048.subs :as subs]))
 
 ;; Panel used to show Score and Best score
@@ -49,12 +50,21 @@
       @board)
      [:br.clear]]))
 
+;; Gameover panel
+(defn gameover-panel []
+  [:div#gameover
+   [:h1 "GAME OVER"]
+   [:div.menubutton
+    {:on-click #(re-frame/dispatch [::events/start-game])}
+    [:h2 "NEW GAME"]]])
+
 ;; Main game panel
 (defn game-panel []
   (let [score (re-frame/subscribe [::subs/score])
-        highscore (re-frame/subscribe [::subs/highscore])] ;; Get the current state of the score
+        highscore (re-frame/subscribe [::subs/highscore]);; Get the current state of the score
+        gameover (re-frame/subscribe [::subs/gameover])]
     [:div#game-panel
      (score-panel "Score" @score)
      (score-panel "Best score" @highscore)
      [:br.clear]
-     (board-panel)]))
+     (if @gameover (gameover-panel) (board-panel))]))

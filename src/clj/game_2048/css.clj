@@ -21,6 +21,7 @@
 
   [:#mainContainer {:background-color "#EDEFE5"
                     :width "26.5rem"
+                    :height "35rem"
                     :margin "2rem auto"
                     :border-radius "0.5rem"
                     :padding "1rem"}]
@@ -59,5 +60,14 @@
                  :font-size "2rem"
                  :padding-top "1.5rem"
                  :margin "0.125rem"}]
+
+  [:#gameover [:h1 {:text-align "center"
+                    :font-size "3rem"}]]
+
+  [:.menubutton [:h2 {:text-align "center"
+                      :background-color "#9DB6BB"
+                      :border-radius "1rem"
+                      :padding "1rem"
+                      :cursor "pointer"}]]
 
   [:.clear {:clear "both"}])

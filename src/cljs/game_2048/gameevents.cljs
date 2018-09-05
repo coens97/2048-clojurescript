@@ -9,7 +9,7 @@
 (re-frame/reg-event-db
  ::gameover
  (fn-traced [db [_ _]]
-            db));; TODO!
+            (assoc db :gameover true)))
 
 ;; Set highscore
 (re-frame/reg-event-db

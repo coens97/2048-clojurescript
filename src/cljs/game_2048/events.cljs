@@ -16,4 +16,7 @@
 (re-frame/reg-event-db
  ::start-game
  (fn-traced [db [_ _]]
-            (assoc db :board (boardevents/empty-board))))
+            (-> db
+                (assoc :board (boardevents/empty-board))
+                (assoc :gameover false)
+                (assoc :score 0))))
