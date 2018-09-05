@@ -42,7 +42,7 @@
 ;; Create swipe event for touch
 (defn init-touch []
   (let [mc (new js/Hammer js/document)]
-    (js-invoke ;; (js/hammertime.get('swipe').set({ direction: Hammer.DIRECTION_ALL }))
+    (js-invoke ;; (mc.get('swipe').set({ direction: Hammer.DIRECTION_ALL }))
      (js-invoke mc "get" "swipe")
      "set"
      #js{:direction js/Hammer.DIRECTION_ALL})
