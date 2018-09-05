@@ -11,9 +11,21 @@
  (fn-traced [db [_ _]]
             db));; TODO!
 
+;; Set highscore
+(re-frame/reg-event-db
+ ::set-highscore
+ (fn-traced [db [_ newscore]]
+            (do
+              (.setItem (.-localStorage js/window) "highscore" newscore) ;; Store higscore in local storage
+              (assoc db :highscore newscore))))
+
 ;; Increase score
 (re-frame/reg-event-db
  ::increase-score
  (fn-traced [db [_ increaseby]]
-            (let [{score :score} db]
-              (assoc db :score (+ score increaseby)))))
+            (let [{score :score
+                   highscore :highscore} db ;; get from current state
+                  newscore (+ score increaseby)] ;; calculate new score
+              (if (< highscore newscore) ;; Check if highscore is beat
+                (re-frame/dispatch [:game-2048.gameevents/set-highscore newscore]))
+              (assoc db :score newscore))))

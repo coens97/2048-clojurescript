@@ -54,7 +54,8 @@
                      2 (re-frame/dispatch [::boardevents/moveleft])
                      4 (re-frame/dispatch [::boardevents/moveright])
                      8 (re-frame/dispatch [::boardevents/moveup])
-                     16 (re-frame/dispatch [::boardevents/movedown])))))))
+                     16 (re-frame/dispatch [::boardevents/movedown]
+                                           "default" nil)))))))
 
 (defn ^:export init []
   (re-frame/dispatch-sync [::events/initialize-db])
