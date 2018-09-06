@@ -67,4 +67,5 @@
      (score-panel "Score" @score)
      (score-panel "Best score" @highscore)
      [:br.clear]
-     (if @gameover (gameover-panel) (board-panel))]))
+     (if @gameover (gameover-panel))
+     (board-panel)]))

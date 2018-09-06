@@ -45,6 +45,7 @@
   [:.board {:background-color "#DDDDDD"
             :border-radius "0.5rem"
             :padding "0.5rem"
+            :position "absolute"
             :width "25rem"
             :margin "0.25rem"}]
 
@@ -61,13 +62,23 @@
                  :padding-top "1.5rem"
                  :margin "0.125rem"}]
 
-  [:#gameover [:h1 {:text-align "center"
+  [:#gameover {:width "26.5rem"
+               :height "24.5rem"
+               :position "absolute"
+               :background-color "rgb(255, 235, 122, 0.3)"
+               :z-index "2"}]
+
+  [:#gameover [:h1 {:margin-top "4rem"
+                    :margin-bottom "2.75rem"
+                    :text-align "center"
                     :font-size "3rem"}]]
 
   [:.menubutton [:h2 {:text-align "center"
-                      :background-color "#9DB6BB"
+                      :border "0.25rem solid #9DB6BB"
                       :border-radius "1rem"
-                      :padding "1rem"
+                      :margin "0 auto"
+                      :width "14rem"
+                      :padding "0.5rem"
                       :cursor "pointer"}]]
 
   [:.clear {:clear "both"}])
